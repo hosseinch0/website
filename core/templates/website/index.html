@@ -1,0 +1,84 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load blog_tags %}
+{% block content %}
+
+<!--******************************************************************************************************************************************
+    ****************************************************************** SECTION *******************************************************************
+    *******************************************************************************************************************************************-->
+<section class="tada-container content-posts">
+
+    <!-- messages -->
+
+
+    <div class="content col-xs-8">
+
+
+
+
+        <!-- *** CONTENT *** -->
+
+        <!-- ARTICLE 1 -->
+        {% for post in page_obj %}
+        <article>
+            <div class="post-image">
+                <a href="{% url 'blog:blog-single' pk=post.id %}"><img src="{{ post.image.url }}"
+                        alt="{{ post.image }}"></a>
+                {% for cat in post.category.all %}
+                <div class="category"><a href="{% url 'blog:blog-category' cat_name=cat.name %}">{{ cat.name }}</a>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="post-text">
+                <span class="date">{{ post.published_at|date:"m d Y"}}</span>
+                <h2><a href="{% url 'blog:blog-single' pk=post.id %}">{{ post.title }}</a></h2>
+                <p class="text">{{ post.content|truncatechars:35 }}</p>
+            </div>
+            <div class="post-info">
+                {% if post.author.first_name != None and post.author.last_name != None %}
+                <div class="post-by">Posted By {{ post.author.first_name}} {{ post.author.last_name }}</div>
+                {% else %}
+                <div class="post-by">Posted By Anonymous </div>
+                {% endif %}
+
+                <div class="clearfix"></div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    <!-- *** SIDEBAR *** -->
+
+    <div class="sidebar col-xs-4">
+
+        <!-- ABOUT ME -->
+
+        {% include "about-me.html" %}
+
+        <!-- LATEST POSTS -->
+
+
+        <!-- FOLLOW US -->
+
+        {% include "follow.html" %}
+
+        <!-- TAGS -->
+
+        {% all_categories %}
+
+        <!-- ADVERTISING -->
+
+        {% include "newsletter.html" %}
+
+        <!-- NEWSLETTER -->
+
+        {% include "ads.html" %}
+
+
+    </div> <!-- #SIDEBAR -->
+
+    <div class="clearfix"></div>
+
+</section>
+
+{% endblock %}

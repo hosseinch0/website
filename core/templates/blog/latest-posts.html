@@ -1,0 +1,20 @@
+<div class="widget latest-posts">
+    <h3 class="widget-title">
+        Latest Posts
+    </h3>
+    <div class="posts-container">
+        {% for post in posts %}
+        <a href="{% url 'blog:blog-single' pk=post.id %}">
+            <div class="item">
+                <img src="{{ post.image.url }}" alt="{{ post.image }}" class="post-image">
+                <div class="info-post">
+                    <h5><a href="{% url 'blog:blog-single' pk=post.id %}">{{ post.title }} <br> </a></h5>
+                    <span class="date">{{ post.published_at|date:"m/d/Y"}}</span>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </a>
+        {% endfor %}
+        <div class="clearfix"></div>
+    </div>
+</div>

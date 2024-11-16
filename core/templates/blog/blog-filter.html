@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!--******************************************************************************************************************************************
+    ****************************************************************** SECTION *******************************************************************
+    *******************************************************************************************************************************************-->
+<section class="tada-container content-posts blog-3-columns">
+    {% for post in page_obj %}
+
+    <div class="content col-xs-4">
+        <article>
+            <div class="post-image">
+                <a href="{% url 'blog:blog-single' pk=post.id %}"><img src="{{post.image.url}}"
+                        alt="{{ post.image }}"></a>
+                {% for cat in post.category.all %}
+                <div class="category"><a href="{% url 'blog:blog-category' cat_name=cat.name %}">{{ cat.name }}</a>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="post-text">
+                <span class="date">{{ post.published_at|date:"m d Y"}}</span>
+                <h2><a href="{% url 'blog:blog-single' pk=post.id %}">{{ post.title }}</a></h2>
+            </div>
+            <div class="post-info">
+                {% if user.profile.first_name == None%}
+                <div class="post-by">Post By Anonymous</div>
+                {% else %}
+                <div class="post-by">Post By {{ user.profile.first_name }}</div>
+                {% endif %}
+            </div>
+        </article>
+
+    </div>
+    {% endfor %}
+
+    <div class="clearfix"></div>
+
+    <div class="navigation">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="prev"><i class="icon-arrow-left8"></i> Previous
+            Page</a>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="next">Next Page <i class="icon-arrow-right8"></i></a>
+        {% endif %}
+        <div class="clearfix"></div>
+    </div>
+
+</section>
+
+</html>
+{% endblock %}

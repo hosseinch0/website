@@ -1,0 +1,132 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load blog_tags %}
+{% block content %}
+<!--******************************************************************************************************************************************
+    ****************************************************************** SECTION *******************************************************************
+    *******************************************************************************************************************************************-->
+
+<section class="tada-container content-posts page post-right-sidebar">
+
+    <!-- *** CONTENT *** -->
+
+    <div class="content col-xs-8">
+
+        <!-- ARTICLE 1 -->
+
+        <article>
+            <div class="post-image">
+                <img src="{% static 'assets/img/about.png' %}" alt="post image 1">
+            </div>
+            <div class="post-text">
+                <h2>About ME / BLOG</h2>
+            </div>
+            <div class="post-text text-content">
+                <div class="text">
+                    <p>I don't know if i can introduce myself as a Junior Developer but i can't find better words.</p>
+                    <br>
+                    <p>I started programming with HTML/CSS and then JavaScript and a bit of NODE.JS.</p>
+                    <br>
+                    <p> Then at college i learned C++ and C# but it didn't take so long i switched to python.</p>
+                    <p> At first i learned basics of PYTHON then OOP. <br><br>For understanding the concept of the
+                        Object
+                        Oriented Programming better in PYTHON i started learning Django which at first was a total
+                        struggle but now i believe it was totally worth it.<br><br>
+                        And I highly recommend you to check the Links Below out.
+                    </p>
+                    <ul>
+                        <li><a href="https://www.djangoproject.com/">DJANGO</a></li>
+                        <li><a href="https://www.django-rest-framework.org/">Django-Rest-Framework</a>.</li>
+                    </ul>
+                    <div class="gallery">
+                        <div class="item-gallery-left">
+                            <img src="{% static 'assets/img/django.png' %}">
+                            <img src="{% static 'assets/img/DRF1.png' %}">
+                        </div>
+                        <div class="item-gallery-center">
+                            <img src="{% static 'assets/img/python-2.jpg' %}">
+                        </div>
+                        <div class="item-gallery-right">
+                            <img src="{% static 'assets/img/js.png' %}">
+                            <img src="{% static 'assets/img/node.png' %}">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+
+                    <p> The most important reason that i started this blog more or less was sharing the knowledge.
+                        I believe at this time it's really necessary to share our comprehension and understandings for
+                        growth.</p><br><br>
+
+                    <p>You can find The main concept of this Blog down here:</p>
+                    <br>
+                    <ul>
+                        <li>I will be trying to Explain the Basics of Programming and Problem Solving with languages
+                            below but
+                            our
+                            main would be PYTHON.</li>
+                        <br>
+                        <ul class="bullet">
+                            <li>PYTHON</li>
+                            <li>JAVASCRIPT</li>
+                            <li>C++</li>
+                        </ul>
+
+                        <li>Introduction To :</li>
+                        <ul class="bullet">
+                            <li>Useful Libraries</li>
+                            <li>Practical Development Tools</li>
+                        </ul>
+
+                        <li>From Simple to Complicated projects</li>
+                        <ul class="bullet">
+                            <li>Web Projects</li>
+                            <li>SoftWare projects</li>
+                        </ul>
+                    </ul>
+
+
+                    <p>To Wrap this up my effort would be on a full path of learning from Scratch <br>based on my
+                        experience.</p>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- *** SIDEBAR *** -->
+
+    <div class="sidebar col-xs-4">
+
+        <!-- ABOUT ME -->
+
+        {% include "about-me.html" %}
+
+        <!-- LATEST POSTS -->
+
+        {% latest_posts %}
+
+        <!-- FOLLOW US -->
+
+        <!-- TAGS -->
+
+        <!-- ADVERTISING -->
+
+        {% include "ads.html"%}
+
+        <!-- NEWSLETTER -->
+
+        {% include "newsletter.html" %}
+
+
+    </div> <!-- #SIDEBAR -->
+
+    <div class="clearfix"></div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% load static %}
+{% for post in nextPosts %}
+
+<div class="next-post">
+    <a href="{% url 'blog:blog-single' pk=post.id%}" class="next">
+        Next Post <i class="icon-arrow-right8"></i>
+        <span class="material-symbols-outlined">
+            arrow_forward_ios
+        </span>
+        <span class="name-post">{{ post.title}}</span>
+    </a>
+    <!-- <img src="{% static 'assets/img/next-post.jpg' %}"> -->
+    <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+</div>
+
+{% endfor %}

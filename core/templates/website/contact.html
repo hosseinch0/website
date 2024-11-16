@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+{% load blog_tags %}
+{% block content %}
+<!--******************************************************************************************************************************************
+    ****************************************************************** SECTION *******************************************************************
+    *******************************************************************************************************************************************-->
+
+<section class="tada-container content-posts page post-right-sidebar">
+
+    <!-- *** CONTENT *** -->
+
+    <div class="content col-xs-8">
+
+        <!-- ARTICLE 1 -->
+
+        <article>
+            <div class="post-image">
+                <img src="{% static 'assets/img/contact-element.jpg' %}" alt="contact image">
+            </div>
+            <div class="post-text">
+                <h2>Contact</h2>
+            </div>
+            <div class="post-text text-content">
+                <div class="text">
+                    <p>I can always use your valuable opinions</p>
+                    <br>
+                    <p>You can reach me with the methods below, Best way would be the first one </p>
+                    <ul class="bullet">
+                        <li><a href="#contact-form">Contact Form Below</a> (Login Required)</li>
+                        <li><a href="https://t.me/HOCH2002">Telegram</a></li>
+                        <li>Email: ilomiliomi2002@gmail.com</li>
+                    </ul>
+                    <br>
+                    <p>Check OUT</p>
+                    <ul class="bullet">
+                        <li><a href="https://github.com/hosseinch0">GitHub</a></li>
+                        <li><a href="https://t.me/HOCH2002">Telegram</a></li>
+                        <li><a href="https://www.instagram.com/hossein_ch02/">Instagram</a></li>
+                        <li><a href="#">Youtube (SOON)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            {% if request.user.is_authenticated %}
+            <div id="contact-form" class="comment-form">
+                <form method="post">
+                    {% csrf_token %}
+                    <input name="sender" value="{{request.user.id}}" hidden>
+                    <span class="field-name">Your Email(required)</span>
+                    <input type="email" class="name" name="email">
+                    <span class="field-name">Your Name (required)</span>
+                    <input type="text" class="email" name="name">
+                    <span class="field-name">Subject</span>
+                    <input type="text" class="email" name="subject">
+                    <span class="field-name">Your Message</span>
+                    <textarea class="message" name="message"></textarea>
+                    {{ form.captcha }}
+                    <button type="submit">Send</button>
+
+                </form>
+
+            </div>
+            {% else %}
+            <div id="contact-form" class="comment-form">
+                <form method="post">
+                    {% csrf_token %}
+                    <span class="field-name">Your Email(required)</span>
+                    <input type="email" class="name" name="email" disabled>
+                    <span class="field-name">Your Name (required)</span>
+                    <input type="text" class="email" name="name" disabled>
+                    <span class="field-name">Subject</span>
+                    <input type="text" class="email" name="subject" disabled>
+                    <span class="field-name">Your Message</span>
+                    <textarea class="message" name="message" placeholder="LOG IN FROM TOP " disabled></textarea>
+                    <!-- <button><a href="{% url 'users:login' %}"></a>Login First</a></button> -->
+
+                </form>
+            </div>
+            {% endif %}
+
+        </article>
+
+
+    </div>
+
+    <!-- *** SIDEBAR *** -->
+
+    <div class="sidebar col-xs-4">
+
+        <!-- ABOUT ME -->
+
+        {% include "about-me.html"%}
+
+        <!-- LATEST POSTS -->
+
+        {% latest_posts %}
+
+
+        <!-- FOLLOW US -->
+
+
+        <!-- TAGS -->
+
+
+        <!-- ADVERTISING -->
+
+        {% include "ads.html" %}
+
+        <!-- NEWSLETTER -->
+
+        {% include "newsletter.html" %}
+
+
+    </div> <!-- #SIDEBAR -->
+
+    <div class="clearfix"></div>
+
+</section>
+
+{% endblock %}

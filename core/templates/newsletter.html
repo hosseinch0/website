@@ -1,0 +1,38 @@
+{% if request.user.is_authenticated %}
+<div class="widget newsletter">
+    <h3 class="widget-title">
+        Newsletter
+    </h3>
+    <div class="newsletter-container">
+        <h4>DO NOT MISS OUR NEWS</h4>
+        <p>Sign up and receive the <br> latest news of the Blog</p>
+        <form method="post" action="{% url 'website:newsletter' %}">
+            {% csrf_token %}
+            <select name="sender" hidden>
+                <option>{{request.user.id}}</option>
+            </select>
+            <input type=" email" class="newsletter-email" placeholder="Your email address..." name="email">
+            <button type="submit" class="newsletter-btn">Send</button>
+        </form>
+    </div>
+    <div class="clearfix"></div>
+</div>
+{% else %}
+
+<div class="widget newsletter">
+    <h3 class="widget-title">
+        Newsletter
+    </h3>
+    <div class="newsletter-container">
+        <h4>DO NOT MISS OUR NEWS</h4>
+        <p>Sign up and receive the <br> latest news of the Blog</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type="email" class="newsletter-email" placeholder="Your email address..." name="email">
+            <button class="newsletter-btn"><a href="{% url 'users:login' %}">Log in first</a></button>
+        </form>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+{% endif %}

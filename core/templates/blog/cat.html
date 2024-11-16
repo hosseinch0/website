@@ -1,0 +1,11 @@
+<div id="tags" class="widget tags">
+    <h3 class="widget-title">
+        Tags
+    </h3>
+    <div class="tags-container">
+        {% for cat in categories %}
+        <a href="{% url 'blog:blog-category' cat_name=cat.name %}">{{ cat.name }}</a>
+        {% endfor %}
+    </div>
+    <div class="clearfix"></div>
+</div>

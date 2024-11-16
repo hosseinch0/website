@@ -1,0 +1,20 @@
+{% load static %}
+
+<div class="widget about-me">
+    <div class="ab-image">
+        <a href="{% url 'website:about' %}">
+            <img src="{% static 'assets/img/about.jpg' %}" alt="about me">
+            <!-- <div class="ab-title">About Me</div> -->
+        </a>
+    </div>
+    <div class="ad-text">
+        <p> Eager and Passionate About Learning Specially Programming </p>
+        <ul>
+            <li>Software Engineer</li>
+            <li>Python</li>
+            <li>Django</li>
+            <li>DRF</li>
+        </ul>
+        <!-- <span class="signing"><img src="{% static 'assets/img/signing.png' %}" alt="signing"></span> -->
+    </div>
+</div>

@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_tags %}
+{% block content %}
+
+
+<!--******************************************************************************************************************************************
+    ****************************************************************** SECTION *******************************************************************
+    *******************************************************************************************************************************************-->
+
+<section class="tada-container content-posts post sidebar-right">
+
+    <!-- *** CONTENT *** -->
+
+    <div class="content col-xs-8">
+
+        <!-- ARTICLE 1 -->
+
+        <article>
+            <div class="post-image">
+                <img src="{{ post.image.url }}" alt="post image 1">
+            </div>
+            {% for cat in post.category.all %}
+            <div class="category">
+                <a href="{% url 'blog:blog-category' cat_name=cat.name %}">{{ cat.name }}</a>
+            </div>
+            {% endfor %}
+            <div class="post-text">
+                <span class="date">{{ post.published_at|date:"d M Y"}}</span>
+                <h2>{{ post.title }}</h2>
+            </div>
+            <div class="post-text text-content">
+                <div class="post-by">Post By {{ post.author }}</div>
+                <div class="text">
+                    <p>{{ post.content }}</p>
+
+                    <div class="gallery">
+
+                        {% if post.image_left %}
+                        <div class="item-gallery-left">
+                            <img src="{{ post.image_left.url }}"><a target="_blank"
+                                href="{{ post.image_left.url }}"><span class="material-symbols-outlined">
+                                    fullscreen
+                                </span></a>
+                        </div>
+                        {% endif %}
+
+
+                        {% if post.image_center %}
+                        <div class="item-gallery-center">
+                            <img src="{{ post.image_center.url }}"><a target="_blank"
+                                href="{{ post.image_center.url }}"><span class="material-symbols-outlined">
+                                    fullscreen
+                                </span></a>
+                        </div>
+                        {% endif %}
+
+
+                        {% if post.image_right %}
+                        <div class="item-gallery-right">
+                            <img src="{{ post.image_right.url }}"><a target="_blank"
+                                href="{{ post.image_right.url }}"><span class="material-symbols-outlined">
+                                    fullscreen
+                                </span></a>
+                        </div>
+                        {% endif %}
+
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+
+            <!-- PREV NEXT POST SECTION MAKING IT DYNAMIC -->
+
+
+
+            {% pre_post_exist post.id %}
+
+            {% next_post_exist post.id %}
+
+
+            <!-- POSTS AUTHOR DESCRIPTION -->
+
+            <div class="author-post-container">
+                <div class="author-post">
+                    <div class="author-image">
+                        <a href="{{ post.github_url }}"><img src="{% static 'assets/img/github.png' %}"></a>
+                    </div>
+                    {% if post.description %}
+                    <div class="author-info">
+                        <span class="author-name">{{ post.author.user.profile.first_name }}
+                            {{post.author.user.profile.last_name}}</span>
+                        <span class="author-description">{{ post.description }}</span>
+                    </div>
+                    {% endif %}
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+
+            <!-- RELATED ARTICLES TO THE POST CATEGORY -->
+
+            <!-- <div class="related-posts">
+                <h2>Related Article</h2>
+                <div class="related-item-container">
+                    <div class="related-item">
+                        <div class="related-image">
+                            <img src="{% static 'assets/img/img-related-1.jpg' %}">
+                            <span class="related-category"><a href="#">Food</a></span>
+                        </div>
+                        <div class="related-text">
+                            <span class="related-date">03 JUNE 2016</span>
+                            <span class="related-title"><a href="#">TINCIDUNT SIT <br> ULTRICIES AMET</a></span>
+                        </div>
+                        <div class="related-author">
+                            Post by <a href="#">AD-THEME</a>
+                        </div>
+                    </div>
+
+                    <div class="related-item">
+                        <div class="related-image">
+                            <img src="{% static 'assets/img/img-related-2.jpg' %}">
+                            <span class="related-category"><a href="#">TECHNOLOGY</a></span>
+                        </div>
+                        <div class="related-text">
+                            <span class="related-date">04 JUNE 2016</span>
+                            <span class="related-title"><a href="#">VIVAMUS ET <br> TURPIS LACINIA</a></span>
+                        </div>
+                        <div class="related-author">
+                            Post by <a href="#">AD-THEME</a>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                </div>
+            </div> -->
+
+            <!-- COMMENTS SECTION -->
+
+            <div class="comments">
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                    /*
+                    var disqus_config = function () {
+                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    */
+                    (function () { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://127-0-0-1-8000-w9vdov6wlt.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+                        powered by Disqus.</a></noscript>
+            </div>
+
+        </article>
+
+    </div>
+
+    <!-- *** SIDEBAR *** -->
+
+    <div class="sidebar col-xs-4">
+
+        <!-- ABOUT ME -->
+
+        {% include 'about-me.html' %}
+
+        <!-- LATEST POSTS -->
+
+        {% latest_posts %}
+
+        <!-- FOLLOW US -->
+
+        {% include 'follow.html' %}
+
+        <!-- TAGS -->
+
+        {% all_categories %}
+
+        <!-- ADVERTISING -->
+
+        {% include 'ads.html' %}
+
+        <!-- NEWSLETTER -->
+
+        {% include 'newsletter.html' %}
+
+
+    </div> <!-- #SIDEBAR -->
+
+    <div class="clearfix"></div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% load static %}
+
+
+{% for post in prevPosts %}
+
+<div class="navigation-post">
+    <div class="prev-post">
+        <!-- <img src="{% static 'assets/img/prev-post.jpg' %}"> -->
+        <a href="{% url 'blog:blog-single' pk=post.id%}" class="prev">
+            <span class="material-symbols-outlined">
+                arrow_back_ios
+            </span>
+            <i class="icon-arrow-left8"></i> Previous Post
+            <span class="name-post">{{ post.title}} </span>
+        </a>
+        <div class="clearfix"></div>
+    </div>
+
+    {% endfor %}
